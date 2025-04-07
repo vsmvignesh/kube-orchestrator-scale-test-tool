@@ -1,0 +1,10 @@
+git+https://github.com/rancher/client-python.git@master#egg=client-python
+azure-identity==1.19.0
+azure-mgmt-containerservice==34.0.0
+azure-mgmt-resource==23.3.0
+azure-mgmt-network==28.1.0
+azure-mgmt-privatedns==1.2.0
+kubernetes==32.0.0
+dotmap==1.3.30
+tqdm==4.67.1
+

@@ -1,0 +1,67 @@
+controlPlane:
+  distro:
+    k3s:
+      enabled: true
+      env:
+      - name: CATTLE_INSECURE
+        value: "true"
+  # This toleration is for coredns pods
+  # Don't remove this
+  coredns:
+    deployment:
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
+
+  service:
+    annotations:
+      "loft.sh/uninstall-on-cluster-delete": "true"
+  statefulSet:
+    scheduling:
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
+      nodeSelector:
+        kubernetes.azure.com/scalesetpriority: spot
+
+policies:
+  limitRange:
+    enabled: true
+    default:
+      memory: 300Mi
+      cpu: 200m
+    defaultRequest:
+      memory: 128Mi
+      cpu: 100m
+
+# Add toleration to all workload pods
+# This is working value. Don't remove
+sync:
+  toHost:
+    ingresses:
+      enabled: true
+    pods:
+      enabled: true
+      enforceTolerations:
+        - kubernetes.azure.com/scalesetpriority=spot:NoSchedule
+
+rbac:
+  role:
+    enabled: true
+    overwriteRules:
+      - apiGroups: [""]
+        resources: ["configmaps", "secrets", "services", "pods", "pods/attach", "pods/portforward", "pods/exec", "persistentvolumeclaims"]
+        verbs: ["create", "delete", "patch", "update", "get", "list", "watch"]
+      - apiGroups: ["apps"]
+        resources: ["statefulsets", "replicasets", "deployments"]
+        verbs: ["get", "list", "watch"]
+      - apiGroups: [""]
+        resources: ["endpoints", "events", "pods/log"]
+        verbs: ["get", "list", "watch"]
+      - apiGroups: ["networking.k8s.io"]
+        resources: ["ingresses"]
+        verbs: ["list", "watch"]
