@@ -1,14 +1,14 @@
 {
   "azure_creds": {
     "subscription_id": "s-u-b-s-c-r-i-p-t-i-o-n-i-d",
-    "resource_group": "SytestZKSK3s",
+    "resource_group": "my-rsg",
     "location": "eastus",
     "vm_size": "Standard_D8s_v4",
     "max_nodes": "170",
-    "private_dns_zone_name": "rancher.systestzks.org"
+    "private_dns_zone_name": "your.dns.org"
   },
   "rancher_creds": {
-    "url": "https://rancher.systestzks.org/v3",
+    "url": "https://my.rancher.org/v3",
     "access_key": "token-xxxxx",
     "secret_key": "r-a-n-c-h-e-r-s-e-c-r-e-t-a-c-c-e-s-s-k-e-y"
   }
