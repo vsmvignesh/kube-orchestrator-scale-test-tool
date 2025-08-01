@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Script to create a test environment for ZKS"""
+"""Script to create a test environment in Rancher"""
 # pylint: disable=logging-fstring-interpolation,too-many-locals,too-many-arguments,broad-except,no-name-in-module,broad-exception-raised,import-error,too-many-lines
 import os
 import sys
@@ -567,7 +567,7 @@ def import_cluster_to_rancher(  # pylint: disable=too-many-positional-arguments
     """
     Import an AKS cluster to Rancher with thread-safe kubeconfig handling.
     Args:
-        host_cluster_name: AKS Cluster name (e.g., systest-zks-test-cluster-550115)
+        host_cluster_name: AKS Cluster name (e.g., test-cluster-550115)
         rancher_url: Rancher URL
         access_key: Rancher access key
         secret_key: Rancher secret key
@@ -657,7 +657,7 @@ def wait_for_vcluster_ready(
     Wait for the vCluster to be ready by checking its pod status.
 
     Args:
-        cluster_name: AKS Cluster name (e.g., systest-zks-test-cluster-550115)
+        cluster_name: AKS Cluster name (e.g., test-cluster-550115)
         vcluster_name: Name of the vCluster (e.g., vcluster-550115-1)
         namespace: Namespace for the vCluster
         kubeconfig_path: Path to the host cluster kubeconfig
@@ -890,7 +890,7 @@ def main(config_file_path: str, num_vclusters=None, cleanup_setup_ids=None, uniq
             cleanup_module.cleanup_resources(logger, cleanup_setup_ids, config)
             logger.info(f"MAIN: Total time taken: {(time.time() - start_time) / 60:.2f} minutes")
             return 0
-        cluster_name = f"systest-zks-test-cluster-{unique_id}"
+        cluster_name = f"test-cluster-{unique_id}"
 
         create_aks_cluster_with_spot(
             config.azure_creds.subscription_id, config.azure_creds.resource_group, cluster_name,
