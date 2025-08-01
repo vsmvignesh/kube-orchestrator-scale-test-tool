@@ -55,7 +55,7 @@ python3 rancher_scale_test_env.py --config <config_file_path> --cleanup <unique_
 assuming all the setups were created in the same Azure account.
 
 The process_id is the id you see in the resources created as part of the script, 
-for e.g. _systest-rancher_scale-test-cluster-18041_ or _vcluster-namespace-18041-2_
+for e.g. _rancher_scale-test-cluster-18041_ or _vcluster-namespace-18041-2_
 As can be seen above, the process ID is 18041. This is the process ID that needs to be passed to the script to delete the setup.
 
 Upon execution of the script, the following resources are deleted:
